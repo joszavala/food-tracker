@@ -13,8 +13,7 @@
                 value = "Search"
                 (click) = "getFoods(angForm.get('foodToSearch').value)" >Search</button>
     </form>
-
-    <div *ngIf="foodData.result > 0">
+    <div *ngIf="foodData.foods">
         <div *ngFor="let food of foodData.foods" class="row">
             <div class="col-xs-12"> 
                 <b>

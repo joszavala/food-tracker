@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import {ActivatedRoute } from "@angular/router";
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { FoodServiceApiService } from './../services/food-service-api/food-service-api.service';
+
 
 @Component({
   selector: 'app-food-details',
@@ -10,32 +10,20 @@ import { Observable } from 'rxjs';
 })
 export class FoodDetailsComponent implements OnInit {
     fdcId: string;
-    foodDetails: any;
+    foodDetails: any = {};
 
-    constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute, private foodApiService: FoodServiceApiService) { }
 
-    ngOnInit() {
-        this.fdcId = this.route.snapshot.paramMap.get("id");
-        this.getFoodDetails(this.fdcId);
-    }
+    async ngOnInit() {
+      this.fdcId = this.route.snapshot.paramMap.get("id");
+      const endpoint = '/foodDetails';
 
-    getFoodDetails(id) {
-        const baseUrl = 'http://localhost:3000';
-        const endpoint = '/foodDetails';
-        const target_url = `${baseUrl}${endpoint}/${id}`;
-
-        this.httpClient.get(
-            target_url
-        ).subscribe(
-            data => {
-                console.log('200');
-                console.log(data);
-                this.foodDetails = data;
-            },
-            error => {
-                console.log(error);
-                this.foodDetails = {error};
-            }
-        );
+      this.foodApiService.getFoodDetails(this.fdcId, endpoint)
+      .subscribe(
+        data => {
+          this.foodDetails = data;
+          console.log(data);
+        }
+      );
     }
 }

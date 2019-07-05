@@ -1,7 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FoodServiceApiService } from '../services/food-service-api/food-service-api.service';
 
 @Component({
   selector: 'app-food-search',
@@ -9,41 +8,32 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./food-search.component.scss']
 })
 export class FoodSearchComponent implements OnInit {
-    angForm: FormGroup;
-    foodData: any = {};
-    foodToSearch: string = null;
+  angForm: FormGroup;
+  foodData: any = {};
+  foodToSearch: string = null;
+  data: any = {};
 
-    constructor(private httpClient: HttpClient, private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private foodApiService: FoodServiceApiService) {}
 
-    ngOnInit() {
-        this.createForm();
-    }
+  ngOnInit() {
+    this.createForm();
+  }
 
-    createForm() {
-      this.angForm = this.fb.group({
-          foodToSearch: ''
-      });
-    }
+  createForm() {
+    this.angForm = this.fb.group({
+        foodToSearch: ''
+    });
+  }
 
-    getFoods(foodToSearch = null) {
-      const baseUrl = 'http://localhost:3000';
-      const endpoint = '/foodSearch';
-      const searchCriteria = foodToSearch.split(' ').join(' \+');
-      const target_url = `${baseUrl}${endpoint}/${searchCriteria}`;
+  async getFoods(foodToSearch = null) {
+    const endpoint = '/foodSearch';
+    const searchCriteria = foodToSearch;
 
-      console.log(searchCriteria);
-
-      this.httpClient.get(
-        target_url
-      ).subscribe(
-        data => {
-          console.log(200);
-          this.foodData = data;
-        },
-        error => {
-          console.log(error);
-          this.foodData = {error};
-        }
-      );
-    }
+    this.foodApiService.getFoods(searchCriteria, endpoint)
+    .subscribe(
+      data => {
+        this.foodData = data;
+      }
+    );
+  }
 }
