@@ -1,4 +1,3 @@
-import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,28 +10,21 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 // Features
-import { FoodSearchComponent } from './food-search/food-search.component';
-import { FoodDetailsComponent } from './food-details/food-details.component';
+import { NutritionFactsLabelComponent } from './feature/nutrition-facts-label/nutrition-facts-label.component';
 
 //Core Components
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { HeaderComponent } from './layout/header/header.component';
+import { FoodSearchComponent } from './core/food-search/food-search.component';
+import { FoodDetailsComponent } from './core/food-details/food-details.component';
 
 //Shared
-import { NutritionFactsLabelComponent } from './nutrition-facts-label/nutrition-facts-label.component';
+import { HomeComponent } from './shared/home/home.component';
+import { NavbarComponent } from './shared/layout/navbar/navbar.component';
+import { FooterComponent } from './shared/layout/footer/footer.component';
+import { HeaderComponent } from './shared/layout/header/header.component';
 
 // Services
 import { FoodServiceApiService } from './services/food-service-api/food-service-api.service';
-
-const appRoutes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'food/search', component: FoodSearchComponent},
-    {path: 'food/details/:id', component: FoodDetailsComponent},
-    {path: 'food/details', component: FoodDetailsComponent},
-    {path: 'food/nutrition', component: NutritionFactsLabelComponent},
-];
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +35,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     FooterComponent,
     HeaderComponent,
-    NutritionFactsLabelComponent
+    NutritionFactsLabelComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -51,8 +44,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule,
-    RouterModule.forRoot(appRoutes)
+    NgbModule
   ],
   providers: [
     FoodServiceApiService

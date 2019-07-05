@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import {ActivatedRoute } from "@angular/router";
-import { FoodServiceApiService } from './../services/food-service-api/food-service-api.service';
+import { FoodServiceApiService } from '../../services/food-service-api/food-service-api.service';
 
 
 @Component({

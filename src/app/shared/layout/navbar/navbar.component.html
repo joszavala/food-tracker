@@ -15,13 +15,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isNavbarCollapsed">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a routerLink="">Home</a>
+                <a routerLink=""
+                  routerLinkActive="Active"
+                  [routerLinkActiveOptions] = "{exact:true}">
+                  Home
+                </a>
             </li>
             <li class="nav-item">
-                <a routerLink="/food/search">Search</a>
-            </li>
-            <li class="nav-item">
-                <a class="/food/details" href="#">Disabled</a>
+                <a routerLink="/food/search"
+                  routerLinkActive="Active">
+                  Search
+                </a>
             </li>
         </ul>
     </div>

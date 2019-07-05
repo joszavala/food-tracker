@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FoodServiceApiService } from '../services/food-service-api/food-service-api.service';
+import { FoodServiceApiService } from '../../services/food-service-api/food-service-api.service';
 
 @Component({
   selector: 'app-food-search',
