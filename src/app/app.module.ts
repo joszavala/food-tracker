@@ -12,11 +12,11 @@ import { AppRoutingModule } from './app-routing.module';
 // Features
 import { NutritionFactsLabelComponent } from './feature/nutrition-facts-label/nutrition-facts-label.component';
 
-//Core Components
+// Core Components
 import { FoodSearchComponent } from './core/food-search/food-search.component';
 import { FoodDetailsComponent } from './core/food-details/food-details.component';
 
-//Shared
+// Shared
 import { HomeComponent } from './shared/home/home.component';
 import { NavbarComponent } from './shared/layout/navbar/navbar.component';
 import { FooterComponent } from './shared/layout/footer/footer.component';
@@ -40,7 +40,7 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
   ],
   imports: [
     BrowserModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,

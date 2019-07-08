@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-nutrition-facts-label',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nutrition-facts-label.component.scss']
 })
 export class NutritionFactsLabelComponent implements OnInit {
+  @Input() nutritionDetails: any = {};
+  facts: any = {};
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { 
+    console.log(this.nutritionDetails.nutritionLabel.calories.value);
+    //console.log(this.nutritionDetails.nutritionLabel.calores.value);
 
+  }
 }

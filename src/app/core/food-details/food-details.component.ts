@@ -1,29 +1,22 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import {ActivatedRoute } from "@angular/router";
-import { FoodServiceApiService } from '../../services/food-service-api/food-service-api.service';
-
+import { Component, OnInit, Injectable, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-food-details',
   templateUrl: './food-details.component.html',
   styleUrls: ['./food-details.component.scss']
 })
+
 export class FoodDetailsComponent implements OnInit {
-    fdcId: string;
-    foodDetails: any = {};
+  fdcId: string;
+  foodDetails: any = {};
+  @Input()nutritionalData: any = {};
 
-    constructor(private route: ActivatedRoute, private foodApiService: FoodServiceApiService) { }
+  constructor(private route: ActivatedRoute) { }
 
-    async ngOnInit() {
-      this.fdcId = this.route.snapshot.paramMap.get("id");
-      const endpoint = '/foodDetails';
-
-      this.foodApiService.getFoodDetails(this.fdcId, endpoint)
-      .subscribe(
-        data => {
-          this.foodDetails = data;
-          console.log(data);
-        }
-      );
-    }
+  async ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.nutritionalData = data.food;
+    });
+  }
 }

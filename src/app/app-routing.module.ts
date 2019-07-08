@@ -10,15 +10,32 @@ import { FoodDetailsComponent } from './core/food-details/food-details.component
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { HomeComponent } from './shared/home/home.component';
 
+// Resolver
+import { FoodDetailsResolve } from './resolvers/food-details.resolve.service';
+
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'food/search' , component: FoodSearchComponent },
-  { path: 'food/details/:id', component: FoodDetailsComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { 
+    path: '', 
+    component: HomeComponent },
+  {
+    path: 'food/search', 
+    component: FoodSearchComponent },
+  {
+    path: 'food/details/:id',
+    component: FoodDetailsComponent,
+    resolve: {
+      food: FoodDetailsResolve
+    },
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [FoodDetailsResolve]
 })
 export class AppRoutingModule { }
