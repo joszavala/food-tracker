@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DecimalPipe } from '@angular/common';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -26,6 +27,7 @@ import { HeaderComponent } from './shared/layout/header/header.component';
 import { FoodServiceApiService } from './services/food-service-api/food-service-api.service';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,8 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
     NgbModule
   ],
   providers: [
-    FoodServiceApiService
+    FoodServiceApiService,
+    DecimalPipe
   ],
   bootstrap: [AppComponent]
 })

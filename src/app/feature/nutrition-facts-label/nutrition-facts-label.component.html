@@ -19,7 +19,7 @@
           Amount per serving
           <br />
           <strong>Calories</strong>
-          <span>{{nutritionDetails.nutritionLabel.calories.value}} </span>
+          <span>{{ formatData(0, 'calories', true) }} </span>
         </th>
       </tr>
     </thead>
@@ -32,34 +32,38 @@
       <tr id="TotFat" class="br">
         <th colspan="3">
           <strong>Total Fat </strong>
-          <input type="text">g</th>
+          {{ formatData(0, 'fat', true) }}g
+        </th>
         <td>
-          <input type="text">%
+          <span>
+            {{ calculatePorcentage('fat') }} %
+          </span>
         </td>
       </tr>
       <tr id="SatFat">
         <td></td>
         <th colspan="2">Saturated Fat
-          <input type="text">g
+          {{ formatData(0, 'saturatedFat', true) }} g
         </th>
         <td>
-          <input type="text">%
+          {{ calculatePorcentage('saturatedFat') }} %
         </td>
       </tr>
       <tr id="TransFat">
         <td>&nbsp;</td>
         <th colspan="2">
-          <em>Trans</em> Fat<input type="text">g
+          <em>Trans</em> Fat
+          {{ formatData(0, 'transFat', true) }} g
         </th>
-        <td></td>
+        <td>{{ calculatePorcentage('transFat') }} %</td>
       </tr>
       <tr>
         <th colspan="3">
           <strong>Cholesterol</strong>
-          <input type="text">mg
+          {{ formatData(0, 'cholesterol', true) }}mg
         </th>
         <td>
-          <input type="text">%
+          {{ calculatePorcentage('cholesterol') }} %
         </td>
       </tr>
       <tr>
@@ -98,7 +102,7 @@
         </th>
         <td></td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td class="indent">&nbsp;</td>
         <td class="indent">&nbsp;</td>
         <th>
@@ -107,7 +111,7 @@
         <td>
           <input type="text">%
         </td>
-      </tr>
+      </tr> -->
       <tr>
         <th colspan="3">
           <strong>Protein</strong>

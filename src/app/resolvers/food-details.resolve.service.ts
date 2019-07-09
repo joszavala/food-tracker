@@ -9,11 +9,10 @@ export class FoodDetailsResolve implements Resolve<any> {
 
   constructor(private foodDetailsService: FoodServiceApiService, private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, rstate: RouterStateSnapshot) {
-    console.log(route);
+  resolve(route: ActivatedRouteSnapshot, rstate: RouterStateSnapshot):Observable<IFoodDetails[]> {
     const endpoint = '/foodDetails';
     const fcdId = route.params['id'];
 
     return this.foodDetailsService.getFoodDetails(fcdId, endpoint);
-  };
+  }
 }
