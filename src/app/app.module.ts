@@ -28,6 +28,13 @@ import { FoodServiceApiService } from './services/food-service-api/food-service-
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { TableNutritionDataComponent } from './shared/table-nutrition-data/table-nutrition-data.component';
 
+// CRUD
+// // Daily Value
+import { DailyValueComponent } from './feature/dailyValue/daily-value/daily-value.component';
+import { DailyValueDetailComponent } from './feature/dailyValue/daily-value-detail/daily-value-detail.component';
+import { DailyValueAddComponent } from './feature/dailyValue/daily-value-add/daily-value-add.component';
+import { DailyValueEditComponent } from './feature/dailyValue/daily-value-edit/daily-value-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +47,11 @@ import { TableNutritionDataComponent } from './shared/table-nutrition-data/table
     HeaderComponent,
     NutritionFactsLabelComponent,
     PageNotFoundComponent,
-    TableNutritionDataComponent
+    TableNutritionDataComponent,
+    DailyValueComponent,
+    DailyValueDetailComponent,
+    DailyValueAddComponent,
+    DailyValueEditComponent,
   ],
   imports: [
     BrowserModule,
