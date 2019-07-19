@@ -31,7 +31,9 @@ export class FoodSearchComponent implements OnInit {
 
     this.foodApiService.getFoods(searchCriteria, endpoint)
     .subscribe(
-      data => {
+      response => {
+        const data = response['data'];
+        console.log('finish', data );
         this.foodData = data;
       }
     );

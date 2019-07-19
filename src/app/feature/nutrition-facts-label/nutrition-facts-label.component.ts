@@ -1,31 +1,43 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ViewEncapsulation, AfterViewInit, ViewChild, OnChanges } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+
+import { TableNutritionDataComponent } from '../../shared/table-nutrition-data/table-nutrition-data.component';
+
 @Component({
   selector: 'app-nutrition-facts-label',
   templateUrl: './nutrition-facts-label.component.html',
-  styleUrls: ['./nutrition-facts-label.component.scss']
+  styleUrls: ['./nutrition-facts-label.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
-export class NutritionFactsLabelComponent implements OnInit {
+export class NutritionFactsLabelComponent implements OnInit, AfterViewInit, OnChanges {
+  // @ViewChild(TableNutritionDataComponent, { static: false }) nutritionDataReference;
   @Input() nutritionDetails: any = {};
   nutritionLabel: any = {};
 
   constructor(private decimalPipe: DecimalPipe) { }
 
   ngOnInit() {
-    this.nutritionLabel = {...this.nutritionDetails.nutritionLabel};
-    console.log(this.nutritionLabel);
+    console.log(this.nutritionDetails.nutritionLabel);
+    this.nutritionLabel = {...this.nutritionDetails.nutritionLabel}
   }
+
+  ngAfterViewInit() {
+    // this.nutritionDataReference.nutritionLabelObj = this.nutritionLabel;
+    // console.log('afterView', this.nutritionDataReference.nutritionLabelObj);
+  }
+
+  ngOnChanges() {}
 
   calculatePorcentage(propertyName: string) {
     if (!this.isValidProperty(this.nutritionLabel, propertyName)) { return null; }
 
     const { value } = this.nutritionLabel[propertyName];
-    const dv: number | boolean = this.getNutrientIntake(propertyName);
+    const { hasDV, totalDailyIntake } = this.getNutrientIntake(propertyName);
 
     if (value === 0) { return value; }
-    if (!dv) { return null; }
+    if (!hasDV && totalDailyIntake === 0 ) { return null; }
 
-    const dIntake = (value / dv) * 100;
+    const dIntake = (value / totalDailyIntake) * 100;
 
     return (this.formatData(dIntake));
   }
@@ -37,17 +49,22 @@ export class NutritionFactsLabelComponent implements OnInit {
       dataToFormat = this.nutritionLabel[propertyName].value;
     }
 
-    if (dataToFormat === 0) { return dataToFormat; }
-
     return this.decimalPipe.transform(dataToFormat, isRequiredDec ? '1.2-2' : '1.0-0');
+    // return `<div>${dataToFormat}</div>`;
   }
 
   getNutrientIntake(type: string) {
+    const nutrientData = {
+      totalDailyIntake: 0,
+      labelName: '',
+      hasDV: true
+    };
     let nIntakeQty = 0;
 
     switch (type) {
       case 'fat': {
-        nIntakeQty = 65;
+        nutrientData.labelName = 'Total Fat';
+        nutrientData.totalDailyIntake = 65;
         break;
       }
       case 'saturatedFat':
@@ -62,14 +79,17 @@ export class NutritionFactsLabelComponent implements OnInit {
       }
       case 'protein':
       case 'sugars': {
-        return false;
+        nutrientData.labelName = 'Total Sugar';
+        nutrientData.hasDV = false;
       }
       case 'sodium': {
-
+        nutrientData.labelName = 'Sodium';
+        nutrientData.totalDailyIntake = 2400;
+        break;
       }
     }
 
-    return nIntakeQty;
+    return nutrientData;
   }
 
   isValidProperty(objectToValidate: object, propertyName: string) {

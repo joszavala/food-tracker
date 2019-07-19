@@ -10,13 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 export class FoodDetailsComponent implements OnInit {
   fdcId: string;
   foodDetails: any = {};
-  @Input()nutritionalData: any = {};
+  nutritionalData: any = {};
 
   constructor(private route: ActivatedRoute) { }
 
   async ngOnInit() {
-    this.route.data.subscribe(data => {
-      this.nutritionalData = data.food;
+    this.route.data.subscribe(response => {
+      const {data} = response.food;
+      this.nutritionalData = data;
     });
   }
 }

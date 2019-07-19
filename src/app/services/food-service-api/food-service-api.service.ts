@@ -14,9 +14,9 @@ export class FoodServiceApiService {
   private BASE_URL = 'http://localhost:3000';
 
   getFoods(searchCriteria: string, endpoint: string): Observable<IFoods[]> {
-    return this.httpClient.get<IFoods[]>(`${this.BASE_URL}${ endpoint }/${searchCriteria}`);
+    return this.httpClient.get<IFoods[]>(`${this.BASE_URL}/v1${ endpoint }/${searchCriteria}`);
   }
   getFoodDetails(fdcID: string, endpoint: string): Observable<IFoodDetails[]> {
-    return this.httpClient.get<IFoodDetails[]>(`${this.BASE_URL}${endpoint}/${fdcID}`);
+    return this.httpClient.get<IFoodDetails[]>(`${this.BASE_URL}/v1${endpoint}/${fdcID}`);
   }
 }

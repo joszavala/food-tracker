@@ -26,6 +26,7 @@ import { HeaderComponent } from './shared/layout/header/header.component';
 // Services
 import { FoodServiceApiService } from './services/food-service-api/food-service-api.service';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
+import { TableNutritionDataComponent } from './shared/table-nutrition-data/table-nutrition-data.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
     FooterComponent,
     HeaderComponent,
     NutritionFactsLabelComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TableNutritionDataComponent
   ],
   imports: [
     BrowserModule,

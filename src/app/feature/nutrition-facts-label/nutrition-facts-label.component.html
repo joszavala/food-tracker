@@ -23,85 +23,46 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody >
       <tr class="daily-value">
         <th colspan="4">
           <strong>% Daily Value*</strong>
         </th>
       </tr>
-      <tr id="TotFat" class="br">
-        <th colspan="3">
-          <strong>Total Fat </strong>
-          {{ formatData(0, 'fat', true) }}g
-        </th>
-        <td>
-          <span>
-            {{ calculatePorcentage('fat') }} %
-          </span>
-        </td>
+      <tr app-table-nutrition-data 
+        [nutritionLabelData]=nutritionDetails.nutritionLabel
+        name="fat"
+        [primary]=true></tr>
+      <tr app-table-nutrition-data
+        [nutritionLabelData]=nutritionDetails.nutritionLabel
+        name="saturatedFat"
+        [primary]=false></tr>
+      <tr app-table-nutrition-data 
+        [nutritionLabelData]=nutritionDetails.nutritionLabel
+        name="transFat"
+        [primary]=false></tr>
+      <tr app-table-nutrition-data 
+        [nutritionLabelData]=nutritionDetails.nutritionLabel
+        name="cholesterol"
+        [primary]=true></tr>
+      <tr app-table-nutrition-data
+        [nutritionLabelData]=nutritionDetails.nutritionLabel
+        name="sodium" 
+        [primary]=true></tr>
+      <tr app-table-nutrition-data 
+        [nutritionLabelData]=nutritionDetails.nutritionLabel 
+        name="carbohydrates"
+        [primary]=true></tr>
+      <tr app-table-nutrition-data 
+        [nutritionLabelData]=nutritionDetails.nutritionLabel 
+        name="fiber" 
+        [primary]=false>
       </tr>
-      <tr id="SatFat">
-        <td></td>
-        <th colspan="2">Saturated Fat
-          {{ formatData(0, 'saturatedFat', true) }} g
-        </th>
-        <td>
-          {{ calculatePorcentage('saturatedFat') }} %
-        </td>
-      </tr>
-      <tr id="TransFat">
-        <td>&nbsp;</td>
-        <th colspan="2">
-          <em>Trans</em> Fat
-          {{ formatData(0, 'transFat', true) }} g
-        </th>
-        <td>{{ calculatePorcentage('transFat') }} %</td>
-      </tr>
-      <tr>
-        <th colspan="3">
-          <strong>Cholesterol</strong>
-          {{ formatData(0, 'cholesterol', true) }}mg
-        </th>
-        <td>
-          {{ calculatePorcentage('cholesterol') }} %
-        </td>
-      </tr>
-      <tr>
-        <th colspan="3">
-          <strong>Sodium</strong>
-          <input type="text">mg
-        </th>
-        <td>
-          <input type="text">%
-        </td>
-      </tr>
-      <tr>
-        <th colspan="3">
-          <strong>Total Carbohydrate</strong>
-          <input type="text">g
-        </th>
-        <td>
-          <input type="text">%
-        </td>
-      </tr>
-      <tr id="fiber">
-        <td>&nbsp;</td>
-        <th colspan="2">
-          Dietary Fiber
-          <input type="text">g
-        </th>
-        <td>
-          <input type="text">%
-        </td>
-      </tr>
-      <tr id="sugars">
-        <td>&nbsp;</td>
-        <th colspan="2">
-          Total Sugars
-          <input type="text">g
-        </th>
-        <td></td>
-      </tr>
+      <tr app-table-nutrition-data
+        [nutritionLabelData]=nutritionDetails.nutritionLabel 
+        name="sugars"
+        [primary]=false></tr>
+      
       <!-- <tr>
         <td class="indent">&nbsp;</td>
         <td class="indent">&nbsp;</td>
@@ -112,13 +73,10 @@
           <input type="text">%
         </td>
       </tr> -->
-      <tr>
-        <th colspan="3">
-          <strong>Protein</strong>
-          <input type="text">g
-        </th>
-        <td></td>
-      </tr>
+      <tr app-table-nutrition-data
+        [nutritionLabelData]=nutritionDetails.nutritionLabel
+        name="protein"
+        [primary]=true></tr>
     </tbody>
   </table>
   <table class="voluntary-nutrients">

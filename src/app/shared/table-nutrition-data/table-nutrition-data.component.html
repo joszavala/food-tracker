@@ -1,0 +1,8 @@
+<td *ngIf="!primary"></td>
+<th [attr.colspan]="labelItemData.colspan">
+  <span [attr.class]="labelItemData.classThText">{{ labelItemData.labelName }} </span>
+  {{ labelItemData.portionQty }} g
+</th>
+<td>
+  {{ labelItemData.intakeDV }} %
+</td>
