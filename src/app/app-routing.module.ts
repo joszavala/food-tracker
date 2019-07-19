@@ -22,30 +22,20 @@ import { DailyValueAddComponent } from './feature/dailyValue/daily-value-add/dai
 import { DailyValueEditComponent } from './feature/dailyValue/daily-value-edit/daily-value-edit.component';
 
 const routes: Routes = [
-  { 
-    path: '',
-    component: HomeComponent },
-  {
-    path: 'food/search',
-    component: FoodSearchComponent },
-  {
-    path: 'food/details/:id',
-    component: FoodDetailsComponent,
-    resolve: {
-      food: FoodDetailsResolve
-    },
+  { path: '', component: HomeComponent },
+  { path: 'food/search', component: FoodSearchComponent },
+  { path: 'food/details/:id', component: FoodDetailsComponent,
+    resolve: { food: FoodDetailsResolve },
     children: [
-      {
-        path:'', component: TableNutritionDataComponent
-      },
-      {
-        path:'', component: NutritionFactsLabelComponent
-      }
+      { path:'', component: TableNutritionDataComponent },
+      { path:'', component: NutritionFactsLabelComponent }
     ]
   },
-  {
-    path: '**',
-    component: PageNotFoundComponent
+  { path: 'dv',  componenent: DailyValueComponent },
+  { path: 'dv/add', component: DailyValueAddComponent },
+  { path: 'dv/edit/:id', component: DailyValueEditComponent },
+  { path: 'dv/details:id', component: DailyValueDetailComponent },
+  { path: '**', component: PageNotFoundComponent
   }
 ];
 
