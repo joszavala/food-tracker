@@ -34,6 +34,7 @@ import { DailyValueComponent } from './feature/dailyValue/daily-value/daily-valu
 import { DailyValueDetailComponent } from './feature/dailyValue/daily-value-detail/daily-value-detail.component';
 import { DailyValueAddComponent } from './feature/dailyValue/daily-value-add/daily-value-add.component';
 import { DailyValueEditComponent } from './feature/dailyValue/daily-value-edit/daily-value-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { DailyValueEditComponent } from './feature/dailyValue/daily-value-edit/d
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule
   ],
   providers: [
     FoodServiceApiService,

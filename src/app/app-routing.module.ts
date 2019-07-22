@@ -27,16 +27,15 @@ const routes: Routes = [
   { path: 'food/details/:id', component: FoodDetailsComponent,
     resolve: { food: FoodDetailsResolve },
     children: [
-      { path:'', component: TableNutritionDataComponent },
-      { path:'', component: NutritionFactsLabelComponent }
+      { path: '', component: TableNutritionDataComponent },
+      { path: '', component: NutritionFactsLabelComponent }
     ]
   },
-  { path: 'dv',  componenent: DailyValueComponent },
+  { path: 'dv',  component: DailyValueComponent },
   { path: 'dv/add', component: DailyValueAddComponent },
   { path: 'dv/edit/:id', component: DailyValueEditComponent },
-  { path: 'dv/details:id', component: DailyValueDetailComponent },
-  { path: '**', component: PageNotFoundComponent
-  }
+  { path: 'dv/details/:id', component: DailyValueDetailComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

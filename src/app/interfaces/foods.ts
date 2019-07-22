@@ -1,7 +1,5 @@
 export interface IFoods {
-  foods: any,
-  [data: string]: any;
-  totalPages: number,
-  totalHits: number
-  
+  foods: any;
+  totalPages: number;
+  totalHits: number;
 }
