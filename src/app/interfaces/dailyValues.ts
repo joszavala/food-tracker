@@ -1,5 +1,5 @@
-export interface IFoodDetails {
-  id: string;
+export interface IDailyValue {
+  _id: string;
   quantity: number;
   name: string;
   unit: string;

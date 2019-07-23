@@ -6,6 +6,11 @@ import { DecimalPipe } from '@angular/common';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// FontAwesome
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
 // Components
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +40,8 @@ import { DailyValueDetailComponent } from './feature/dailyValue/daily-value-deta
 import { DailyValueAddComponent } from './feature/dailyValue/daily-value-add/daily-value-add.component';
 import { DailyValueEditComponent } from './feature/dailyValue/daily-value-edit/daily-value-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatDialogModule } from '@angular/material';
+import { ActionDialogComponent } from './shared/action-dialog/action-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DailyValueDetailComponent,
     DailyValueAddComponent,
     DailyValueEditComponent,
+    ActionDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,12 +68,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    MatDialogModule
   ],
   providers: [
     FoodServiceApiService,
     DecimalPipe
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ActionDialogComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    library.add(fas);
+  }
+}

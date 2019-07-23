@@ -1,0 +1,14 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">Do you want to delete {{moduleFrom}} {{title}} </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <fa-icon [icon]="['fas', 'check']" class="deleteOk" (click) ="deleteInfo()"></fa-icon>
+    </div>
+    <div class="col-3">
+      <fa-icon [icon]="['fas', 'times']" class="deleteClose" (click)="closeDialog()"></fa-icon>
+    </div>
+  </div>
+</div>

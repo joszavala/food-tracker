@@ -1,1 +1,26 @@
-<p>daily-value works!</p>
+<div class="row">
+  <div class="col-5 center text-center text-uppercase margin-separator">Nutrient</div>
+  <div class="col-5 offset-2 text-center text-uppercase">Actions</div>  
+</div>
+<div *ngIf="dvList" class="row">
+  <div *ngFor="let dv of dvList" class="col-12 dvList">
+    <div class="row">
+      <div class="col-5 text-center align-self-center">
+        <b>
+          {{dv.name}}
+        </b>
+      </div>
+      <div class="col-6 offset-1 text-center actions align-self-center">
+        <a class="btn btn-primary btn-sm" href="dv/edit/{{dv._id}}">
+          <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+        </a>
+        <a class="btn btn-info btn-sm" href="dv/details/{{dv._id}}">
+          <fa-icon [icon]="['fas', 'file-alt']"></fa-icon>
+        </a>
+        <a class="btn btn-danger btn-sm" (click)="openDialog(dv)">
+          <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

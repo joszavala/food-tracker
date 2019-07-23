@@ -11,12 +11,12 @@ import { IFoodDetails } from 'src/app/interfaces/foodDetails';
 export class FoodServiceApiService {
   constructor(private httpClient: HttpClient) { }
 
-  private BASE_URL = 'http://localhost:3000';
+  private BASE_URL = 'http://localhost:3000/v1';
 
   getFoods(searchCriteria: string, endpoint: string): Observable<IFoods[]> {
-    return this.httpClient.get<IFoods[]>(`${this.BASE_URL}/v1${ endpoint }/${searchCriteria}`);
+    return this.httpClient.get<IFoods[]>(`${this.BASE_URL}${ endpoint }/${searchCriteria}`);
   }
   getFoodDetails(fdcID: string, endpoint: string): Observable<IFoodDetails[]> {
-    return this.httpClient.get<IFoodDetails[]>(`${this.BASE_URL}/v1${endpoint}/${fdcID}`);
+    return this.httpClient.get<IFoodDetails[]>(`${this.BASE_URL}${endpoint}/${fdcID}`);
   }
 }
