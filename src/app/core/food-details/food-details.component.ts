@@ -1,3 +1,4 @@
+import { DailyValueAddComponent } from './../../feature/dailyValue/daily-value-add/daily-value-add.component';
 import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

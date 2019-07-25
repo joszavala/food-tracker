@@ -14,7 +14,7 @@ export class DailyValueComponent implements OnInit {
   constructor(private systemNutrientService: SystemNutrientServiceApiService, private dialogCase: MatDialog) { }
 
   ngOnInit(isUpdated = false) {
-  if (isUpdated) { /* Show message. */ }
+    if (isUpdated) { /* Show message. */ }
     this.getDailyValueDetail();
   }
 
@@ -40,7 +40,10 @@ export class DailyValueComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.systemNutrientService.DailyValues.delete(result._id).subscribe(
-          data => this.ngOnInit()
+          data => {
+            const isUpdated  = data['code'] === 200;
+            this.ngOnInit(isUpdated);
+          }
         );
       }
     });

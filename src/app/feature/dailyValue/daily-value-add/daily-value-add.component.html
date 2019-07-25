@@ -1,1 +1,48 @@
-<p>daily-value-add works!</p>
+  <form [formGroup]="dvForm" (ngSubmit)="saveDailyValue(id)">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input 
+        type="text"
+        class = "form-control form-control-lg" 
+        placeholder = "ex. Fat, Saturated Fat" 
+        formControlName="name" 
+        id="name"/>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input 
+        type="number" 
+        class="form-control form-control-lg" 
+        placeholder="ex. Fat, Saturated Fat"
+        formControlName="quantity" 
+        id="quantity"/>
+    </div>
+    <div class="form-group">
+      <label for="unit">Unit</label>
+      <select class="form-control" formControlName="unit" id="unit">
+        <option value="g" selected="selected">Grams</option>
+        <option value="mg">Miligrams</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="systemName">System Name</label>
+      <input 
+        type="text" 
+        class="form-control form-control-lg" 
+        placeholder="ex. saturatedFat"
+        formControlName="systemName" 
+        id="systemName" />
+    </div>
+    <div class="form-group">
+      <label for="hasDV">Has a Daily Value?</label>
+      <input
+        type="checkbox"
+        class="form-control form-control-lg"
+        formControlName="hasDV"
+        id="hasDV" />
+    </div>
+    
+    <button type="submit" class="btn btn-primary col-md-4" [disabled]="dvForm.invalid">
+      {{ buttonLegend }}
+    </button>
+  </form>

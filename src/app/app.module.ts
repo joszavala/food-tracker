@@ -42,6 +42,7 @@ import { DailyValueEditComponent } from './feature/dailyValue/daily-value-edit/d
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material';
 import { ActionDialogComponent } from './shared/action-dialog/action-dialog.component';
+import { ToastComponent } from './shared/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ActionDialogComponent } from './shared/action-dialog/action-dialog.comp
     DailyValueAddComponent,
     DailyValueEditComponent,
     ActionDialogComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
