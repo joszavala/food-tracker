@@ -1,4 +1,3 @@
-import { DailyValueAddComponent } from './../../feature/dailyValue/daily-value-add/daily-value-add.component';
 import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,6 +16,7 @@ export class FoodDetailsComponent implements OnInit {
 
   async ngOnInit() {
     this.route.data.subscribe(response => {
+      console.log(response);
       const {data} = response.food;
       this.nutritionalData = data;
     });

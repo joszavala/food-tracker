@@ -1,7 +1,7 @@
 <td *ngIf="!primary"></td>
 <th [attr.colspan]="labelItemData.colspan">
   <span [attr.class]="labelItemData.classThText">{{ labelItemData.labelName }} </span>
-  {{ labelItemData.portionQty }} g
+  {{ labelItemData.portionQty }} {{ labelItemData.unit}}
 </th>
 <td>
   {{ labelItemData.intakeDV }} %

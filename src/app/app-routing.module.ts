@@ -13,6 +13,7 @@ import { NutritionFactsLabelComponent } from './feature/nutrition-facts-label/nu
 
 // Resolver
 import { FoodDetailsResolve } from './resolvers/food-details.resolve.service';
+import { DailyValuesResolveService } from './resolvers/daily-values-resolve.service';
 
 // CRUD
 // // Daily Value
@@ -25,10 +26,13 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'food/search', component: FoodSearchComponent },
   { path: 'food/details/:id', component: FoodDetailsComponent,
-    resolve: { food: FoodDetailsResolve },
+    resolve: {  food: FoodDetailsResolve,
+                dailyValues: DailyValuesResolveService  },
     children: [
       { path: '', component: TableNutritionDataComponent },
-      { path: '', component: NutritionFactsLabelComponent }
+      { path: '', component: NutritionFactsLabelComponent,
+        resolve: { dailyValues: DailyValuesResolveService }
+      }
     ]
   },
   { path: 'dv',  component: DailyValueComponent },

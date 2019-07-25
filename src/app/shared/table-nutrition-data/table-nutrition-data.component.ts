@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
@@ -9,14 +10,21 @@ import { DecimalPipe } from '@angular/common';
 export class TableNutritionDataComponent implements OnInit, OnChanges {
   @Input()name: string;
   @Input()primary: boolean;
-  @Input()nutritionLabelData: any = {};
   public nutritionLabelObj: any = {};
   private labelItemData: any = {};
+  private dailyValues: any;
 
-  constructor(private decimalPipe: DecimalPipe) { }
+  constructor(
+    private decimalPipe: DecimalPipe,
+    private router: ActivatedRoute) { }
 
   ngOnInit() {
-    this.nutritionLabelObj = {...this.nutritionLabelData};
+    this.router.data.subscribe(
+      res => {
+        this.nutritionLabelObj = res.food.data.nutritionLabel;
+        this.dailyValues = res.dailyValues.data
+      }
+    );
 
     this.labelItemData = {
       ...this.calculatePorcentage(this.name),
@@ -32,13 +40,14 @@ export class TableNutritionDataComponent implements OnInit, OnChanges {
     if (!this.isValidProperty(this.nutritionLabelObj, propertyName)) { return null; }
 
     const { value } = this.nutritionLabelObj[propertyName];
-    const { hasDV, totalDailyIntake, labelName } = this.getNutrientIntake(propertyName);
+    const { hasDV, totalDailyIntake, labelName, unit } = this.getNutrientIntake(propertyName);
 
     const dIntake = (value / totalDailyIntake) * 100;
 
     return {
       intakeDV: !hasDV ? null : this.formatData(dIntake),
       labelName,
+      unit,
     };
   }
 
@@ -56,54 +65,18 @@ export class TableNutritionDataComponent implements OnInit, OnChanges {
     const nutrientData = {
       totalDailyIntake: 0,
       labelName: '',
-      hasDV: true
+      hasDV: true,
+      unit: ''
     };
 
-    switch (type) {
-      case 'fat': {
-        nutrientData.labelName = 'Total Fat';
-        nutrientData.totalDailyIntake = 65;
-        break;
+    this.dailyValues.map(dailyValue => {
+      if (dailyValue.systemName === type) {
+        nutrientData.labelName = dailyValue.name;
+        nutrientData.totalDailyIntake =  dailyValue.quantity;
+        nutrientData.unit = dailyValue.unit;
+        nutrientData.hasDV = dailyValue.hasDV;
       }
-      case 'saturatedFat':
-      case 'transFat': {
-        nutrientData.labelName = type === 'saturatedFat' ? 'Saturated Fat' : 'Trans Fat';
-        nutrientData.totalDailyIntake = 20;
-        break;
-      }
-      case 'cholesterol':
-      case 'carbohydrates': {
-        nutrientData.labelName = type === 'cholesterol' ? 'Cholesterol' : 'Total Carbohydrate';
-        nutrientData.totalDailyIntake = 300;
-        break;
-      }
-      case 'protein':
-      case 'sugars': {
-        nutrientData.labelName = type === 'protein' ? 'Protein' : 'Total Sugar';
-        nutrientData.hasDV = false;
-        break;
-      }
-      case 'sodium': {
-        nutrientData.labelName = 'Sodium';
-        nutrientData.totalDailyIntake = 2400;
-        break;
-      }
-      case 'fiber': {
-        nutrientData.labelName = 'Dietary Fiber';
-        nutrientData.totalDailyIntake = 25;
-        break;
-      }
-      case 'calcium': {
-        nutrientData.labelName = 'Calcium';
-        nutrientData.totalDailyIntake = 1100;
-        break;
-      }
-      case 'iron': {
-        nutrientData.labelName = 'Iron';
-        nutrientData.totalDailyIntake = 14;
-        break;
-      }
-    }
+    });
 
     return nutrientData;
   }

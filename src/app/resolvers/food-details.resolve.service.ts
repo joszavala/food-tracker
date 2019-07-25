@@ -7,12 +7,15 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class FoodDetailsResolve implements Resolve<any> {
 
-  constructor(private foodDetailsService: FoodServiceApiService, private router: Router) { }
+  constructor(
+    private foodDetailsService: FoodServiceApiService,
+    private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot, rstate: RouterStateSnapshot):Observable<IFoodDetails[]> {
     const endpoint = '/foodDetails';
     const fcdId = route.params['id'];
+    const foodDetails = this.foodDetailsService.getFoodDetails(fcdId, endpoint);
 
-    return this.foodDetailsService.getFoodDetails(fcdId, endpoint);
+    return foodDetails;
   }
 }

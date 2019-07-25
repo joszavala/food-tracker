@@ -1,7 +1,8 @@
-import { Component, OnInit, Input,ViewEncapsulation, AfterViewInit, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, Input,ViewEncapsulation } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
-import { TableNutritionDataComponent } from '../../shared/table-nutrition-data/table-nutrition-data.component';
+import { SystemNutrientServiceApiService } from './../../services/system-nutrient-service-api/system-nutrient-service-api.service';
 
 @Component({
   selector: 'app-nutrition-facts-label',
@@ -9,38 +10,40 @@ import { TableNutritionDataComponent } from '../../shared/table-nutrition-data/t
   styleUrls: ['./nutrition-facts-label.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class NutritionFactsLabelComponent implements OnInit, AfterViewInit, OnChanges {
-  // @ViewChild(TableNutritionDataComponent, { static: false }) nutritionDataReference;
+export class NutritionFactsLabelComponent implements OnInit {
   @Input() nutritionDetails: any = {};
   nutritionLabel: any = {};
+  dailyValues: any;
 
-  constructor(private decimalPipe: DecimalPipe) { }
+  constructor(
+    private decimalPipe: DecimalPipe,
+    private router: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.nutritionDetails.nutritionLabel);
-    this.nutritionLabel = {...this.nutritionDetails.nutritionLabel}
+    this.router.data.subscribe(
+      res => {
+        this.nutritionLabel = res.food.data.nutritionLabel;
+        console.log(this.nutritionLabel);
+      }
+    );
+
+    // this.nutritionLabel = {...this.nutritionDetails.nutritionLabel}
+
   }
 
-  ngAfterViewInit() {
-    // this.nutritionDataReference.nutritionLabelObj = this.nutritionLabel;
-    // console.log('afterView', this.nutritionDataReference.nutritionLabelObj);
-  }
+  // calculatePorcentage(propertyName: string) {
+  //   if (!this.isValidProperty(this.nutritionLabel, propertyName)) { return null; }
+  //   console.log('lol');
+  //   const { value } = this.nutritionLabel[propertyName];
+  //   const { hasDV, totalDailyIntake } = this.getNutrientIntake(propertyName);
 
-  ngOnChanges() {}
+  //   if (value === 0) { return value; }
+  //   if (!hasDV && totalDailyIntake === 0 ) { return null; }
 
-  calculatePorcentage(propertyName: string) {
-    if (!this.isValidProperty(this.nutritionLabel, propertyName)) { return null; }
+  //   const dIntake = (value / totalDailyIntake) * 100;
 
-    const { value } = this.nutritionLabel[propertyName];
-    const { hasDV, totalDailyIntake } = this.getNutrientIntake(propertyName);
-
-    if (value === 0) { return value; }
-    if (!hasDV && totalDailyIntake === 0 ) { return null; }
-
-    const dIntake = (value / totalDailyIntake) * 100;
-
-    return (this.formatData(dIntake));
-  }
+  //   return (this.formatData(dIntake));
+  // }
 
   formatData(dataToFormat?: number, propertyName: string = '', isRequiredDec: boolean = false) {
     if (dataToFormat === 0) {
@@ -50,47 +53,55 @@ export class NutritionFactsLabelComponent implements OnInit, AfterViewInit, OnCh
     }
 
     return this.decimalPipe.transform(dataToFormat, isRequiredDec ? '1.2-2' : '1.0-0');
-    // return `<div>${dataToFormat}</div>`;
   }
 
-  getNutrientIntake(type: string) {
-    const nutrientData = {
-      totalDailyIntake: 0,
-      labelName: '',
-      hasDV: true
-    };
-    let nIntakeQty = 0;
+  // getNutrientIntake(type: string) {
+  //   // const nutrientData = {
+  //   //   totalDailyIntake: 0,
+  //   //   labelName: '',
+  //   //   hasDV: true
+  //   // };
 
-    switch (type) {
-      case 'fat': {
-        nutrientData.labelName = 'Total Fat';
-        nutrientData.totalDailyIntake = 65;
-        break;
-      }
-      case 'saturatedFat':
-      case 'transFat': {
-        nIntakeQty = 20;
-        break;
-      }
-      case 'cholesterol':
-      case 'carbohydrates': {
-        nIntakeQty = 300;
-        break;
-      }
-      case 'protein':
-      case 'sugars': {
-        nutrientData.labelName = 'Total Sugar';
-        nutrientData.hasDV = false;
-      }
-      case 'sodium': {
-        nutrientData.labelName = 'Sodium';
-        nutrientData.totalDailyIntake = 2400;
-        break;
-      }
-    }
+  //   // this.dailyValues.map(dailyValue => {
+  //   //   console.log(dailyValue.systemName);
+  //   //   if (dailyValue.systemName === type) {
+  //   //     nutrientData.labelName = dailyValue.name;
+  //   //     nutrientData.totalDailyIntake =  dailyValue.intake;
+  //   //     nutrientData.hasDV = dailyValue.hasDV;
+  //   //   }
+  //   // });
 
-    return nutrientData;
-  }
+  //   // let nIntakeQty = 0;
+
+  //   // switch (type) {
+  //   //   case 'fat': {
+  //   //     nutrientData.labelName = 'Total Fat';
+  //   //     break;
+  //   //   }
+  //   //   case 'saturatedFat':
+  //   //   case 'transFat': {
+  //   //     nIntakeQty = 20;
+  //   //     break;
+  //   //   }
+  //   //   case 'cholesterol':
+  //   //   case 'carbohydrates': {
+  //   //     nIntakeQty = 300;
+  //   //     break;
+  //   //   }
+  //   //   case 'protein':
+  //   //   case 'sugars': {
+  //   //     nutrientData.labelName = 'Total Sugar';
+  //   //     nutrientData.hasDV = false;
+  //   //   }
+  //   //   case 'sodium': {
+  //   //     nutrientData.labelName = 'Sodium';
+  //   //     nutrientData.totalDailyIntake = 2400;
+  //   //     break;
+  //   //   }
+  //   // }
+
+  //   //return nutrientData;
+  // }
 
   isValidProperty(objectToValidate: object, propertyName: string) {
     return objectToValidate.hasOwnProperty(propertyName);
